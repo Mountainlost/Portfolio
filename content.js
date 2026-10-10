@@ -1,4 +1,9 @@
 window.PORTFOLIO_CONTENT = {
+  design: {
+    heroImage: "assets/hero-art.webp",
+    elementStyles: {},
+    elementOffsets: {}
+  },
   meta: {
     title: "Portfolio® — 独立创意作品集",
     description: "Portfolio 是一个关注视觉、品牌与数字体验的独立创意作品集。"
