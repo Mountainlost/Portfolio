@@ -1,85 +1,54 @@
-# Portfolio® 中文作品集网站
+# Portfolio® 中文作品集 / Studio v2
 
-这是一个纯静态、响应式的个人作品集网站，包含：
+这是一个可直接部署到 GitHub Pages 的静态作品集网站。正式页是 `index.html`，可视化编辑器是 `studio.html`。
 
-- `index.html`：正式网站
-- `studio.html`：对照编辑页（左侧实时画布，右侧编辑器）
-- `content.js`：文字、排版参数、拖动位置和项目数据
-- `assets/`：作品图片与首屏主视觉
-- `.nojekyll`：让 GitHub Pages 直接发布静态文件
+## 当前能力
 
-## 对照编辑器现在支持
+- 中文为主的作品集页面；装饰性小字保留英文。
+- 首页主标题为 `PORTFOLIO`，中段可保留描边视觉。
+- 首页主视觉为普通图片 + WebGL 动效：缓慢液态流动、光泽漂移、鼠标视差。移动端自动降低强度，系统开启“减少动态效果”时自动回退静态图。
+- 左侧实时预览，桌面 / 平板 / 手机三种视口。
+- 点击模板文字可修改：内容、字体、字号、字重、行高、字距、颜色、对齐、透明度、层级、位置。
+- 模板文字可直接在画布拖动并自动吸附；可隐藏（相当于删除），之后从“元素 / 图层”恢复。
+- 可新增自由文本、自由图片、文本超链接；自由元素可拖动、复制、删除、修改层级与所在区域。
+- 自由图片支持上传、圆角、裁切方式、透明度、点击链接。
+- 作品项目数量不固定，可新增 / 删除 / 替换封面。
+- 支持撤销 / 重做（当前编辑会话）。
+- GitHub 设置完成后，“保存并发布”会上传新图片并更新 `content.js`，GitHub Pages 随仓库提交自动重新部署。
 
-打开 `studio.html` 后：
+## 文件
 
-1. **点击左侧任意可编辑文字**，右侧会出现该元素的专属编辑面板。
-2. 可以修改：文字内容、字体、字号、行高、字间距。
-3. **按住左侧文字直接拖动**，位置按 8px 网格吸附，并会对齐页面容器、页面中线和其它文字的边缘 / 中心。
-4. 右侧可以精确输入 X / Y 偏移，也可以一键恢复默认位置或默认排版。
-5. 首屏主图可以直接上传替换。
-6. 项目封面仍然可以逐个上传替换。
-7. 所有修改在左侧实时预览，点击“保存并发布”后才会写入 GitHub。
-
-## 本地查看
-
-直接打开 `index.html` 可以看正式网站。为了让 iframe、上传和浏览器存储行为与线上一致，更推荐用本地服务器：
-
-```bash
-python -m http.server 8000
-```
-
-浏览器访问：
-
-- 正式页：`http://localhost:8000/index.html`
-- 编辑页：`http://localhost:8000/studio.html`
+- `index.html`：公开作品集
+- `studio.html`：对照式可视化编辑器
+- `content.js`：文字、项目、排版、自定义元素和主视觉动效配置
+- `assets/`：默认视觉素材
+- `assets/uploads/`：Studio 发布图片时自动创建 / 使用
 
 ## GitHub Pages 部署
 
-1. 新建一个 GitHub 仓库，例如 `portfolio`。
-2. 把这个文件夹里的**全部文件**上传到仓库 `main` 分支根目录。
-3. 仓库进入 `Settings → Pages`。
-4. `Build and deployment` 选择 `Deploy from a branch`。
-5. Branch 选择 `main`，文件夹选择 `/ (root)`，保存。
-6. 网站地址通常是 `https://用户名.github.io/仓库名/`。
+1. 将本目录内容上传到仓库根目录。
+2. GitHub 仓库 → Settings → Pages。
+3. Source 选择 `Deploy from a branch`。
+4. Branch 选择 `main`，目录选择 `/ (root)`。
+5. 正式页：`https://用户名.github.io/仓库名/`
+6. 编辑器：`https://用户名.github.io/仓库名/studio.html`
 
-CSS、JavaScript、图片动画和当前编辑器都可以直接在 GitHub Pages 上运行，不需要云服务器。
+## Studio 的 GitHub 权限
 
-## 第一次连接 GitHub
+建议创建 Fine-grained Personal Access Token，并且只授权当前作品集仓库：
 
-打开线上 `studio.html`，点击右上角 **GitHub 设置**，填写：
+- Repository permissions → Contents → Read and write
 
-- GitHub 用户名
-- 仓库名
-- 分支（默认 `main`）
-- 正式网站地址（可选）
-- GitHub Fine-grained Personal Access Token
+Token 只写入当前浏览器标签页的 `sessionStorage`，关闭标签页后消失，不会写进网站仓库。
 
-Token 建议只授权给这个作品集仓库，并只开启 **Contents: Read and write**。
+## 主视觉动效
 
-Token 只保存在当前浏览器标签页的 `sessionStorage`，不会写进网站文件或仓库。关闭标签页后会消失。
+Studio → “首屏主视觉 / 动效”可以：
 
-## 保存并发布
+- 开启 / 关闭动效
+- 调整流动强度
+- 调整流动速度
+- 调整鼠标视差
+- 上传新的主视觉图片
 
-点击 **保存并发布** 后，编辑器会：
-
-1. 把新首屏主图 / 项目图片上传到 `assets/uploads/`。
-2. 把文字、字体参数和拖动位置写入 `content.js`。
-3. 提交到 GitHub `main` 分支。
-4. GitHub Pages 自动重新部署正式站点。
-
-## 图片建议
-
-- 首屏主图：建议宽屏 JPG / WebP，比例约 16:9～21:9，2 MB 以内。
-- 项目封面：建议 JPG / WebP / PNG，比例接近 4:3，单张 1–2 MB 以内。
-
-## 更新已有 GitHub 网站
-
-如果仓库里已经有旧版，请至少替换：
-
-- `index.html`
-- `studio.html`
-- `content.js`
-- `README.md`
-- `assets/hero-art.webp`
-
-然后 Commit。GitHub Pages 会自动重新部署。
+动效代码完全在浏览器端运行，因此 GitHub Pages 支持，不需要云服务器。
