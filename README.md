@@ -2,6 +2,8 @@
 
 这是一个可直接部署到 GitHub Pages 的静态作品集网站。正式页是 `index.html`，可视化编辑器是 `studio.html`。
 
+https://mountainlost.github.io/Portfolio/studio.html?utm_source=chatgpt.com
+
 ## 当前能力
 
 - 中文为主的作品集页面；装饰性小字保留英文。
